@@ -10,8 +10,11 @@ var Engine = function(options) {
   };
   $.extend(opt, options);
   this.options = opt;
+
+  var canvas = $(opt.selector);
+  canvas.attr({ width: opt.width, height: opt.height });
   
-  this.ctx = $('#gamecanvas')[0].getContext('2d');
+  this.ctx = canvas[0].getContext('2d');
   
   this.sprites = new SpriteSheet('img/html5tank.gif', {
     'powerup': {
@@ -76,8 +79,10 @@ ep.createFPSCounter = function() {
 ep.drawLoop = function(time) {
   var ctx = this.ctx;
   for(var i = 0; i < 100; i++) {
-    this.sprites.draw('powerup', Math.randRange(0,800), Math.randRange(0,600), 32, 32);
-    this.sprites.draw('explosion', Math.randRange(0,800), Math.randRange(0,600), 32, 32);
+    this.sprites.draw('powerup', Math.randRange(0,this.options.width), 
+       Math.randRange(0, this.options.height), 32, 32);
+    this.sprites.draw('explosion', Math.randRange(0, this.options.width),
+       Math.randRange(0, this.options.height), 32, 32);
   };
   ctx.clearRect(350, 250, 100, 100);
 
@@ -141,8 +146,8 @@ Math.randRange = function(from, to) {
 var test = new Engine({
   selector: '#gamecanvas',
   debug: true,
-  width: 800,
-  height: 600
+  width: window.innerWidth - 10,
+  height: window.innerHeight - 10
 });
 
 
