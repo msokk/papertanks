@@ -30,7 +30,7 @@ var Engine = function(options) {
       h: 32
     }
   }, this.ctx);
-  
+    
   this.start();
 
   if(opt.debug) {
@@ -79,6 +79,7 @@ ep.createFPSCounter = function() {
 ep.drawLoop = function(time) {
   var ctx = this.ctx;
   for(var i = 0; i < 100; i++) {
+    
     this.sprites.draw('powerup', Math.randRange(0,this.options.width), 
        Math.randRange(0, this.options.height), 32, 32);
     this.sprites.draw('explosion', Math.randRange(0, this.options.width),
@@ -92,55 +93,6 @@ ep.updateLoop = function(time) {
   
 };
 
-var SpriteSheet = function(src, spritemap, ctx) {
-  this.ready = false;
-  this.img = new Image();
-  this.img.src = src;
-  this.img.onload = function() {
-    this.ready = true;
-  };
-  this.spritemap = spritemap || {};
-  this.ctx = ctx;
-};
-
-SpriteSheet.prototype.draw = function(key, x, y, w, h) {
-  var sprite = this.spritemap[key];
-  this.ctx.drawImage(this.img, sprite.x, sprite.y,
-    sprite.w, sprite.h, x, y, w, h);
-};
-
-
-window.cancelRequestAnimFrame = (function() {
-  return window.cancelAnimationFrame         ||
-    window.webkitCancelRequestAnimationFrame ||
-    window.mozCancelRequestAnimationFrame    ||
-    window.oCancelRequestAnimationFrame      ||
-    window.msCancelRequestAnimationFrame     ||
-    window.clearTimeout;
-})();
-
-window.requestAnimFrame = (function() {
-  return window.requestAnimationFrame  || 
-    window.webkitRequestAnimationFrame || 
-    window.mozRequestAnimationFrame    || 
-    window.oRequestAnimationFrame      || 
-    window.msRequestAnimationFrame     || 
-    function(callback, element) {
-      return window.setTimeout(callback, 1000 / 60);
-    };
-})();
-
-/**
- * Returns random decimal number in the range
- * @param {Number} from
- * @param {Number} to
- * @return {Number}
- */
-Math.randRange = function(from, to) {
-  return from + Math.round(Math.random() * (to - from));
-};
-
-
 
 //Init
 var test = new Engine({
@@ -149,5 +101,4 @@ var test = new Engine({
   width: window.innerWidth - 10,
   height: window.innerHeight - 10
 });
-
 
