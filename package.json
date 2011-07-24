@@ -1,0 +1,22 @@
+{
+  "name": "tankproto",
+  "description": "Soon to be tankgame",
+  "version": "0.0.1",
+  "author": "Mihkel Sokk <mihkel@sokk.ee> (http://mihkel.sokk.ee)",
+  "contributors": [ 
+    { "name": "Jaanus Sakkis", "email": "feks@feks.me" }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Multimaania/tankproto.git"
+  },
+  "engines": {
+    "node": ">= 0.4.9 < 0.7.0"
+  },
+  "dependencies": {
+    "express": ">= 2.4.3",
+    "jade": ">= 0.13.0",
+    "mongoose": ">= 1.7.2",
+    "socket.io": ">= 0.7.7"
+  }
+}
