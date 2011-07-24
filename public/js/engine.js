@@ -16,31 +16,20 @@ var Engine = function(options) {
   
   this.ctx = canvas[0].getContext('2d');
   
-  this.sprites = new SpriteSheet('img/html5tank.gif', {
-    'powerup': {
-      x: 160,
-      y: 0,
-      w: 32,
-      h: 32
-    },
-    'explosion': {
-      x: 130,
-      y: 0,
-      w: 32,
-      h: 32
-    }
-  }, this.ctx);
+  this.sprites = SpriteSheet.loadTankSheet(this.ctx);
     
   this.start();
 
   if(opt.debug) {
     this.createFPSCounter();
   }
+
 };
 var ep = Engine.prototype;
 
 ep.FPSSAMPLERATE = 10;
 ep.FPS = 0;
+
 
 ep.start = function() {
   var that = this;
@@ -78,15 +67,12 @@ ep.createFPSCounter = function() {
 
 ep.drawLoop = function(time) {
   var ctx = this.ctx;
-  for(var i = 0; i < 100; i++) {
-    
-    this.sprites.draw('powerup', Math.randRange(0,this.options.width), 
-       Math.randRange(0, this.options.height), 32, 32);
-    this.sprites.draw('explosion', Math.randRange(0, this.options.width),
-       Math.randRange(0, this.options.height), 32, 32);
-  };
-  ctx.clearRect(350, 250, 100, 100);
 
+  new Powerup('freeze').draw(ctx);
+  new Powerup('life').draw(ctx);
+  
+  new Powerup('protection').draw(ctx);
+  ctx.clearRect(300, 300, 100, 100);
 };
 
 ep.updateLoop = function(time) {
