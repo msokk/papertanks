@@ -1,12 +1,11 @@
 var express = require('express'),
-    io = require('socket.io'),
     loginHandler = require(__dirname + '/lib/login'),
     apiHandler = require(__dirname + '/lib/api');
-    
+
 var app = express.createServer();
 app.use(express.bodyParser());
 app.use(express.cookieParser());
-app.use(express.session({ secret: 'tanker' }));
+app.use(express.session({ secret: 'tanker', cookie: { httpOnly: false } }));
 app.use(express.favicon());
 app.use(express.responseTime());
 app.use(express.logger('short'));
@@ -29,3 +28,5 @@ loginHandler(app);
 apiHandler(app);
 
 app.listen(3000);
+
+console.log('Moving out on port %d!', app.address().port);
