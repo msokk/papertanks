@@ -1,1 +1,5 @@
-node_modules
+Server/node_modules
+Android/out
+Android/.idea
+Android/TankController.iml
+Android/gen
