@@ -1,4 +1,10 @@
+(function() {
+
+if(typeof io == 'undefined') { return; }
+
 var sid = getCookies()['connect.sid'];
+
+
 
 var socket = io.connect();
 socket.on('connect', function () {
@@ -12,3 +18,5 @@ function createRoom() {
     });
   });
 }
+
+})();

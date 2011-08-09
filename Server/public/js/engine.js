@@ -78,13 +78,3 @@ ep.drawLoop = function(time) {
 ep.updateLoop = function(time) {
   
 };
-
-
-//Init
-var test = new Engine({
-  selector: '#gamecanvas',
-  debug: true,
-  width: window.innerWidth - 10,
-  height: window.innerHeight - 10
-});
-
