@@ -15,12 +15,12 @@ var SpriteSheet = function(src, spritemap, ctx) {
 
 SpriteSheet.prototype.draw = function(key, x, y, w, h) {
     /*if(this.ready) {        */
-        var sprite = this.spritemap[key];
-        if(sprite && !sprite.animated) {
-            this.ctx.drawImage(this.img, sprite.x, sprite.y,
-                sprite.w, sprite.h, x, y, w, h);
-        }
- //   }    
+    var sprite = this.spritemap[key];
+    if(sprite && !sprite.animated) {
+        this.ctx.drawImage(this.img, sprite.x, sprite.y,
+            sprite.w, sprite.h, x, y, w, h);
+    }
+//   }    
 };
 
 SpriteSheet.loadTankSheet = function(ctx) {
@@ -78,6 +78,24 @@ SpriteSheet.loadTankSheet = function(ctx) {
             y: 32,
             w:32,
             h:32
+        },
+        'player': {
+            x: 0,
+            y: 64,
+            w:32,
+            h:32
+        },
+        'player_move': {
+            x: 0,
+            y: 96,
+            w:32,
+            h:32
+        },
+        'bullet': {
+            x: 32,
+            y: 0,
+            w:16,
+            h:16
         }
     }, ctx);
     ctx.sprites = sprites;

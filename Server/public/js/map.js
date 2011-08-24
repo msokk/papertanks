@@ -12,50 +12,67 @@
 var Map = function() {};
 Map.prototype.load = function(map_data, ctx) {
     var home_rendered = false;
-    
+    var players_drawn = 0;
+    var top = [];    
+    var middle = [];
+    var bottom = [];
+    var obj;
     map_data.forEach(function(element, index) {        
         element.split('').forEach(function(character, position) {       
             switch(character) {
                 case "b":
-                    var name = 'brick1';
+                    var name = 'brick1';                    
                     if (position % 2 != 0 && index % 2 == 0) {
                         name = 'brick2';
                     } else if (position % 2 == 0 && index % 2 != 0) {
                         name = 'brick2';
                     }
-                    ctx.sprites.draw(
-                        name, 
-                        position*8,
-                        index*8,
-                        8, 8
-                        );
+                    obj = new Brick(name, position*8, index*8);                    
                     break;
                 case "s":
                     if (index % 2 == 0 && position % 2 == 0) {
-                        ctx.sprites.draw(
-                            'steel', 
-                            position*8,
-                            index*8,
-                            16, 16
-                            );
+                        obj = new Steel(position*8, index*8);                    
                     }
                     break;
                 case "h":
                     if (!home_rendered) {
                         home_rendered = true;
-                        ctx.sprites.draw(
-                            'home', 
-                            position*8,
-                            index*8,
-                            32, 32
-                            );
+                        obj = new Home(position*8, index*8);                        
+                    }
+                    break;
+                case "p":
+                    if (players_drawn == 0) {
+                        players_drawn = 1;
+                        obj = new Player(position*8, index*8);
+                        window.player = obj;
+                        var kb = new Keyboard();
+                        kb.bindKey("a", function() {
+                            window.player.moveLeft()
+                        });
+                        kb.bindKey("w", function() {
+                            window.player.moveUp()
+                        });
+                        kb.bindKey("d", function() {
+                            window.player.moveRight()
+                        });
+                        kb.bindKey("s", function() {
+                            window.player .moveDown()
+                        });
                     }
                     break;
                 default:
-                    break;
+                    break;                    
             }
+            if (obj)
+                middle.push(obj);
+            obj = null;
         })
     });
+    return {
+        'top' : top, 
+        'middle' : middle, 
+        'bottom':bottom
+    }
 }
 
 

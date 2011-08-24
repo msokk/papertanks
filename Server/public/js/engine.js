@@ -22,7 +22,9 @@ var Engine = function(options) {
     
     this.sprites = SpriteSheet.loadTankSheet(this.ctx);
     var map = new Map();
-    map.load(Map.map_1, this.ctx);
+    this.map_objects = map.load(Map.map_1, this.ctx);    
+    
+    
     this.start();
 
     if(opt.debug) {
@@ -72,13 +74,13 @@ ep.createFPSCounter = function() {
 
 ep.drawLoop = function(time) {
     var ctx = this.ctx;
+    ctx.fillRect(0,0,(52*8), (52*8));
+    for (var el in this.map_objects) {        
+        this.map_objects[el].forEach(function(obj, pos) {
+            obj.draw(ctx);
+        });        
+    }
     
-    /*new Powerup('freeze').draw(ctx);
-    new Powerup('life').draw(ctx);
-  
-    new Powerup('protection').draw(ctx);*/
-    
-    //ctx.clearRect(300, 300, 100, 100);
 };
 
 ep.updateLoop = function(time) {
