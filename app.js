@@ -27,6 +27,6 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 loginHandler(app);
 apiHandler(app);
 
-app.listen(process.env.C9_PORT || 3000);
+app.listen(process.env.C9_PORT || process.env.PORT || 3000);
 
 console.log('Moving out on port %d!', app.address().port);
