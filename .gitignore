@@ -1,8 +1,4 @@
-Server/node_modules
-Server/public/all.js
-Server/public/all.min.js
-Android/out
-Android/.idea
-Android/TankController.iml
-Android/gen
+node_modules
+public/all.js
+public/all.min.js
 nbproject
