@@ -1,10 +1,11 @@
 {
-  "name": "tankproto",
+  "name": "papertanks",
   "description": "Soon to be tankgame",
   "version": "0.0.1",
   "author": "Mihkel Sokk <mihkel@sokk.ee> (http://mihkel.sokk.ee)",
   "contributors": [ 
-    { "name": "Jaanus Sakkis", "email": "feks@feks.me" }
+    { "name": "Jaanus Sakkis", "email": "feks@feks.me" },
+    { "name": "Rainit Vildo", "email": "rainitvildo@gmail.com" }
   ],
   "repository": {
     "type": "git",
