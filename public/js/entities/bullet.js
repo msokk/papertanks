@@ -15,6 +15,7 @@ Bullet.prototype.draw = function(ctx) {
     ctx.rotate((this.direction-90) * (Math.PI / 180));
     ctx.translate(-(this.x + (this.width / 2)), -(this.y + (this.height / 2)));    
     ctx.sprites.draw(this.type, this.x, this.y, 16, 16);
+    ctx.restore();
 };
 
 Bullet.prototype.fly = function() {
@@ -26,6 +27,10 @@ Bullet.prototype.fly = function() {
         this.x += this.speed;
     } else {
         this.y += this.speed;
+    }
+    
+    if(this.y < 0 || this.x < 0 || this.x > 416 || this.y > 416) {
+        this.player.bullet = null;        
     }
 }
 

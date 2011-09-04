@@ -56,7 +56,10 @@ Map.prototype.load = function(map_data, ctx) {
                             window.player.moveRight()
                         });
                         kb.bindKey("s", function() {
-                            window.player .moveDown()
+                            window.player.moveDown()
+                        });
+                        kb.bindKey(" ", function() {
+                            window.player.shoot()
                         });
                     }
                     break;

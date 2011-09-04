@@ -27,12 +27,12 @@ Player.prototype.draw = function(ctx) {
         type = 'player';
     }   
         
-    ctx.sprites.draw(type, this.x, this.y, 32, 32);    
+    ctx.sprites.draw(type, this.x, this.y, 32, 32);
+    ctx.restore();
     if (this.bullet) {
         this.bullet.draw(ctx);
         this.bullet.fly();
-    }
-    ctx.restore();    
+    }  
 };
 
 Player.prototype.moveUp = function() {
