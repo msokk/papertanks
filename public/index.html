@@ -34,12 +34,14 @@
     <button onclick="createRoom()" style="position: fixed; bottom: 10px; left: 100px;">Create room</button>
     <button onclick="new Explosion().draw(test.ctx, 0, 0);" style="position: fixed; bottom: 10px; left: 10px;">Go boom!</button>
     <script>
-      //Init
-      var test = new Engine({
-        selector: '#gamecanvas',
-        debug: false,
-        width: window.innerWidth - 10,
-        height: window.innerHeight - 10
+      $(document).ready(function() {
+        //Init
+        var test = new Engine({
+          selector: '#gamecanvas',
+          debug: false,
+          width: window.innerWidth - 10,
+          height: window.innerHeight - 10
+        });
       });
     </script>
   </body>

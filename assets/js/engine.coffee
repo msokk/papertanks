@@ -1,7 +1,7 @@
 ###
- # {Game} Engine
- # @constructor
- # @param {Object} Options
+{Game} Engine
+@constructor
+@param {Object} Options
 ###
 class Engine 
   constructor: (options) ->
@@ -16,8 +16,8 @@ class Engine
 
     canvas = $(@opt.selector)
     canvas.attr({
-        width: 52*8, 
-        height: 52*8
+      width: 52*8, 
+      height: 52*8
     })
   
     @ctx = canvas[0].getContext '2d'
@@ -32,24 +32,21 @@ class Engine
 
     @createFPSCounter() if @opt.debug
 
-
-
   start: ->
     @oldTime = new Date().getTime() - 5
     @animFrameLoop = (time) =>
-        @updateLoop(time)
-        @drawLoop(time)
-        frameFPS = 1000 / (time - @oldTime)
-        @FPS += (frameFPS - @FPS) / @FPSSAMPLERATE
-        @oldTime = time
-        window.requestAnimFrame @animFrameLoop
+      @updateLoop(time)
+      @drawLoop(time)
+      frameFPS = 1000 / (time - @oldTime)
+      @FPS += (frameFPS - @FPS) / @FPSSAMPLERATE
+      @oldTime = time
+      window.requestAnimFrame @animFrameLoop
     @animFrameLoop new Date().getTime()
 
   stop: ->
-    if(@animFrameLoop) {
-        window.cancelRequestAnimFrame(@animFrameLoop)
-        delete @animFrameLoop
-    }
+    if @animFrameLoop
+      window.cancelRequestAnimFrame(@animFrameLoop)
+      delete @animFrameLoop
 
   getFPS: ->
     @FPS.toFixed 1
@@ -57,16 +54,14 @@ class Engine
   createFPSCounter: ->
     $('body').append '<div id="fpscounter"></div>'
     setInterval =>
-        $('#fpscounter').html(@getFPS() + ' FPS')
-    }, 250)
+      $('#fpscounter').html(@getFPS() + ' FPS')
+    , 250
 
   drawLoop: (time) ->
     @ctx.fillRect 0, 0, 52*8, 52*8
-    for (el in @map_objects) {        
-        @map_objects[el].forEach((obj, pos) =>
-            obj.draw(@ctx)
-        })        
-    }
+    for el in @map_objects        
+      @map_objects[el].forEach (obj, pos) =>
+        obj.draw(@ctx)
 
   updateLoop: (time) ->
   
