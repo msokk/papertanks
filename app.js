@@ -9,6 +9,7 @@ app.use(express.session({ secret: 'tanker', cookie: { httpOnly: false } }));
 app.use(express.favicon());
 app.use(express.responseTime());
 app.use(express.logger('short'));
+app.use(require('connect-assets')());
 app.use(express.static(__dirname + '/public'));
 
 
