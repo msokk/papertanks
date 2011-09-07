@@ -11,14 +11,20 @@ class Engine
 
     @FPSSAMPLERATE = 10
     @FPS = 0
+    
+    @scale = yes
+    
+    @tileBaseSize = 8
+    @fieldWidth = 52
+    @fieldHeight = 52
 
     $canvas = $(@opt.selector)
     $canvas.attr
-      width: 52*8,
-      height: 52*8
+      width: 52 * 8
+      height: 52 * 8
   
     @ctx = $canvas[0].getContext '2d'
-    @ctx.fillRect 0, 0, 52*8, 52*8
+    @ctx.fillRect 0, 0, 52 * 8, 52 * 8
     
     @sprites = SpriteSheet.loadTankSheet @ctx
     map = new Map
@@ -27,7 +33,7 @@ class Engine
     @start()
     
     @createFPSCounter() if @opt.debug
-
+  
   start: ->
     @oldTime = new Date().getTime() - 5
     @animFrameLoop = (time) =>
