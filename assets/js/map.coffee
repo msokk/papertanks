@@ -1,87 +1,61 @@
-/*
- * e - enemy_spawnpoint
- * g - grass
- * b - bricks
- * p - player_spawnpoint
- * h - home
- * s - steel
- * w - water
- * i - ice
- * 
- */
-var Map = function() {};
-Map.prototype.load = function(map_data, ctx) {
-    var home_rendered = false;
-    var players_drawn = 0;
-    var top = [];    
-    var middle = [];
-    var bottom = [];
-    var obj;
-    map_data.forEach(function(element, index) {        
-        element.split('').forEach(function(character, position) {       
-            switch(character) {
-                case "b":
-                    var name = 'brick1';                    
-                    if (position % 2 != 0 && index % 2 == 0) {
-                        name = 'brick2';
-                    } else if (position % 2 == 0 && index % 2 != 0) {
-                        name = 'brick2';
-                    }
-                    obj = new Brick(name, position*8, index*8);                    
-                    break;
-                case "s":
-                    if (index % 2 == 0 && position % 2 == 0) {
-                        obj = new Steel(position*8, index*8);                    
-                    }
-                    break;
-                case "h":
-                    if (!home_rendered) {
-                        home_rendered = true;
-                        obj = new Home(position*8, index*8);                        
-                    }
-                    break;
-                case "p":
-                    if (players_drawn == 0) {
-                        players_drawn = 1;
-                        obj = new Player(position*8, index*8);
-                        window.player = obj;
-                        var kb = new Keyboard();
-                        kb.bindKey("a", function() {
-                            window.player.moveLeft()
-                        });
-                        kb.bindKey("w", function() {
-                            window.player.moveUp()
-                        });
-                        kb.bindKey("d", function() {
-                            window.player.moveRight()
-                        });
-                        kb.bindKey("s", function() {
-                            window.player.moveDown()
-                        });
-                        kb.bindKey(" ", function() {
-                            window.player.shoot()
-                        });
-                    }
-                    break;
-                default:
-                    break;                    
-            }
-            if (obj)
-                middle.push(obj);
-            obj = null;
-        })
-    });
-    return {
-        'top' : top, 
-        'middle' : middle, 
-        'bottom':bottom
-    }
-}
+# e - enemy_spawnpoint
+# g - grass
+# b - bricks
+# p - player_spawnpoint
+# h - home
+# s - steel
+# w - water
+# i - ice
+class Map
+  load: (map_data, ctx) ->
+    home_rendered = false
+    players_drawn = 0
+    top = []    
+    middle = []
+    bottom = []
+    obj = null
+     
+    map_data.forEach (element, index) ->        
+      element.split('').forEach (character, position) ->    
+        switch character
+          when 'b'
+            name = 'brick1'                    
+            if position % 2 isnt 0 and index % 2 is 0
+              name = 'brick2'
+            else if position % 2 is 0 and index % 2 isnt 0
+              name = 'brick2'
+            obj = new Brick name, position*8, index*8                    
 
+          when 's'
+            if index % 2 is 0 and position % 2 is 0
+              obj = new Steel position*8, index*8
+            
+          when 'h'
+            if not home_rendered
+              home_rendered = true
+              obj = new Home position*8, index*8                       
+            
+          when 'p'
+            if not players_drawn 
+              players_drawn = yes
+              obj = new Player position*8, index*8
+              window.player = obj
+              kb = new Keyboard
+              kb.bindKey 'a', -> window.player.moveLeft()
+              kb.bindKey 'w', -> window.player.moveUp()
+              kb.bindKey 'd', -> window.player.moveRight()
+              kb.bindKey 's', -> window.player.moveDown()
+              kb.bindKey ' ', -> window.player.shoot()
+                
+        middle.push obj if obj
+        obj = null
+    
+    'top': top
+    'middle': middle
+    'bottom': bottom 
 
-
-Map.map_1 = [   
-    "****                    ****                    ****", //52x52
+  @map_1 = [   
+    "****                    ****                    ****", #52x52
     "****                    ****                    ****",
     "****                    ****                    ****",
     "****                    ****                    ****",
@@ -132,5 +106,6 @@ Map.map_1 = [
     "                  ppppbbhhhhbbpppp                  ",
     "                  ppppbbhhhhbbpppp                  ",
     "                  ppppbbhhhhbbpppp                  ",
-    "                  ppppbbhhhhbbpppp                  "
-    ];
+    "                  ppppbbhhhhbbpppp                  "]
+    
+window.Map = Map

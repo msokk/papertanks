@@ -5,23 +5,21 @@
 Math.randRange = (from, to) -> from + Math.round Math.random() * (to - from)
 
 # Polyfills for HTML5 requestAnimationFrame
-window.cancelRequestAnimFrame = ( ->
+window.cancelRequestAnimFrame = do ->
   window.cancelAnimationFrame              or
   window.webkitCancelRequestAnimationFrame or
   window.mozCancelRequestAnimationFrame    or
   window.oCancelRequestAnimationFrame      or
   window.msCancelRequestAnimationFrame     or
   window.clearTimeout
-)()
 
-window.requestAnimFrame = ( ->
+window.requestAnimFrame = do ->
   window.requestAnimationFrame       or
   window.webkitRequestAnimationFrame or
   window.mozRequestAnimationFrame    or
   window.oRequestAnimationFrame      or
   window.msRequestAnimationFrame     or
   (callback, element) -> window.setTimeout callback, 1000 / 60
-)()
 
 # Simple cookie parser
 window.getCookies = ->
