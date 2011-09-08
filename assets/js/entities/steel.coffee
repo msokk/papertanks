@@ -1,10 +1,7 @@
-class Steel
-  constructor: (x, y) ->
+class Steel extends Entity
+  constructor: (@x, @y) ->
     @type = 'steel'
-    @x = x
-    @y = y    
-
-  draw: (ctx) ->
-    ctx.sprites.draw @type, @x, @y, 16, 16
+    @w = 16
+    @h = 16
 
 window.Steel = Steel

@@ -1,3 +1,6 @@
+# Papertank namespace
+@PT = {}
+
 # Returns random decimal number in the range
 # @param {Number} from
 # @param {Number} to

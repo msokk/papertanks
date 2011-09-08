@@ -1,14 +1,11 @@
 # Spritesheet manager
 class SpriteSheet
-  constructor: (src, spritemap, ctx) ->
+  constructor: (src, @spritemap = {}, @ctx) ->
     @ready = false
     @img = new Image
     @img.onload = =>
       @ready = true    
     @img.src = src
-    
-    @spritemap = spritemap or {}
-    @ctx = ctx
 
   draw: (key, x, y, w, h) ->
     sprite = @spritemap[key]
@@ -25,8 +22,8 @@ class SpriteSheet
         brick2:      { x: 0,   y: 24, w: 8,  h: 8  },
         steel:       { x: 0,   y: 0,  w: 16, h: 16 },
         home:        { x: 0,   y: 32, w: 32, h: 32 },
-        player:      { x: 0,   y: 64, w: 32, h: 32 },
-        player_move: { x: 0,   y: 96, w: 32, h: 32 },
+        player:      { x: 1,   y: 70, w: 26, h: 26 },
+        player_move: { x: 1,   y: 102, w: 26, h: 26 },
         bullet:      { x: 32,  y: 0,  w: 16, h: 16 },
         ctx
     ctx.sprites = sprites  

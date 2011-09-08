@@ -1,20 +1,17 @@
 class Bullet
-  constructor: (player, x, y) ->
+  constructor: (@player, @x, @y) ->
     @type = 'bullet'
-    @x = x
-    @y = y    
-    @direction = player.direction
-    @player = player
+    @direction = @player.direction
     @speed = 2
-    @height = 16
-    @width = 16
+    @w = 16
+    @h = 16
 
   draw: (ctx) ->  
     ctx.save()
-    ctx.translate @x + (@width / 2) , @y + (@height / 2)
+    ctx.translate @x + (@w / 2) , @y + (@h / 2)
     ctx.rotate (@direction - 90) * (Math.PI / 180)
-    ctx.translate -( @x + (@width / 2) ), -( @y + (@height / 2))
-    ctx.sprites.draw @type, @x, @y, 16, 16
+    ctx.translate -( @x + (@w / 2) ), -( @y + (@h / 2))
+    ctx.sprites.draw @type, @x, @y, @w, @h
     ctx.restore()
 
   fly: ->

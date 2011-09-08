@@ -1,13 +1,17 @@
+PT = @PT
+
 class Entity 
-  constructor: (type) ->
-    @type = type
+  constructor: (@x = 0, @y = 0) ->
+    @type = 'unknown'
+    @w = 8
+    @h = 8
 
   draw: (ctx, time) ->
-    ctx.sprites.draw @type, 
-      Math.randRange(0, window.innerWidth - 10), 
-      Math.randRange(0,  window.innerHeight - 10),
-      32, 32
+    ctx.sprites.draw @type, @x, @y, @w, @h
 
   update: (time) ->
+    
+  intersects: (e) ->
+    Math.abs(@x - e.x) * 2 < @w + e.w and Math.abs(@y - e.y) * 2 < @h + e.h
     
 window.Entity = Entity

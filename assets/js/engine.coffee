@@ -1,13 +1,9 @@
+PT = @PT
+
 # {Game} Engine
 # @constructor
-# @param {Object} Options
 class Engine
-  constructor: (options) ->
-    @opt =
-      selector: 'canvas'
-      debug: false
-
-    $.extend @opt, options
+  constructor: (@selector = 'canvas', @debug = false) ->
 
     @FPSSAMPLERATE = 10
     @FPS = 0
@@ -18,7 +14,7 @@ class Engine
     @fieldWidth = 52
     @fieldHeight = 52
 
-    $canvas = $(@opt.selector)
+    $canvas = $(@selector)
     $canvas.attr
       width: 52 * 8
       height: 52 * 8
@@ -28,11 +24,11 @@ class Engine
     
     @sprites = SpriteSheet.loadTankSheet @ctx
     map = new Map
-    @map_objects = map.load Map.map_1, @ctx
+    PT.map_objects = @map_objects = map.load Map.map_collision_test, @ctx
     
     @start()
     
-    @createFPSCounter() if @opt.debug
+    @createFPSCounter() if @debug
   
   start: ->
     @oldTime = new Date().getTime() - 5
@@ -59,11 +55,13 @@ class Engine
     , 250
 
   drawLoop: (time) ->
+    @ctx.fillStyle = "black"
     @ctx.fillRect 0, 0, 52*8, 52*8
     for el of @map_objects
       @map_objects[el].forEach (obj, pos) =>
         obj.draw @ctx
 
   updateLoop: (time) ->
+    PT.player1?.update(time)
 
-window.Engine = Engine
+PT.Engine = Engine
