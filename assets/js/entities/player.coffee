@@ -82,9 +82,9 @@ class Player extends Entity
       y_b = @y + (@h / 2) - 8
       switch @direction
         when 0   then y_b -= 16
-        when 90  then x_b += 16
+        when 90  then x_b -= 16
         when 180 then y_b += 16
-        else x_b -= 16
+        else x_b += 16
 
       @bullet = new Bullet @, x_b, y_b
 
