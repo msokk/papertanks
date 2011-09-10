@@ -42,9 +42,8 @@ class Player extends Entity
   
   update: (time) ->
     window.PT.map_objects.middle.forEach (obj) =>
-      
-      #console.log 'Math.abs(%s - %s) * 2 < %s + %s and Math.abs(%s - %s) * 2 < %s + %s', obj.x, @x, obj.w, @w, obj.y, @y, obj.h, @h 
       if obj.intersects?(@) and not obj.health?
+        console.log 'Math.abs(%s - %s) * 2 < %s + %s', obj.y, @y, obj.h, @h
         ctx = PT.activeEngine.ctx
         ctx.strokeStyle = "red"
         ctx.strokeRect obj.x, obj.y, obj.w, obj.h
@@ -82,9 +81,9 @@ class Player extends Entity
       y_b = @y + (@h / 2) - 8
       switch @direction
         when 0   then y_b -= 16
-        when 90  then x_b -= 16
+        when 90  then x_b += 16
         when 180 then y_b += 16
-        else x_b += 16
+        else x_b -= 16
 
       @bullet = new Bullet @, x_b, y_b
 

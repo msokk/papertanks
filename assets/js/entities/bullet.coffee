@@ -1,4 +1,4 @@
-class Bullet
+class Bullet extends Entity
   constructor: (@player, @x, @y) ->
     @type = 'bullet'
     @direction = @player.direction
@@ -13,6 +13,12 @@ class Bullet
     ctx.translate -( @x + (@w / 2) ), -( @y + (@h / 2))
     ctx.sprites.draw @type, @x, @y, @w, @h
     ctx.restore()
+    
+  update: (time) ->
+    window.PT.map_objects.middle.forEach (obj, index) =>
+      if obj.intersects?(@) and not obj.health?
+        @player.bullet = null
+        delete window.PT.map_objects.middle[index]
 
   fly: ->
     switch @direction

@@ -4,7 +4,7 @@ PT = @PT
 # @constructor
 class Engine
   constructor: (@selector = 'canvas', @debug = false) ->
-
+  
     @FPSSAMPLERATE = 10
     @FPS = 0
     
@@ -19,6 +19,9 @@ class Engine
       width: 52 * 8
       height: 52 * 8
   
+    $canvas.click (e) ->
+      console.log 'x: %s y: %s', e.offsetX, e.offsetY
+      
     @ctx = $canvas[0].getContext '2d'
     @ctx.fillRect 0, 0, 52 * 8, 52 * 8
     
@@ -63,5 +66,6 @@ class Engine
 
   updateLoop: (time) ->
     PT.player1?.update(time)
+    PT.player1?.bullet?.update(time)
 
 PT.Engine = Engine
