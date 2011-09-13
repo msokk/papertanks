@@ -29,11 +29,11 @@ class Player extends Entity
     
     ctx.sprites.draw @type, @x, @y, @w, @h
     ctx.restore()
-    ctx.lineWidth = 1  
+    ctx.lineWidth = 1.0
     ctx.lineCap = 'butt'
     ctx.strokeStyle = "red"
 
-    ctx.strokeRect @x, @y, @w, @h
+    ctx.strokeRect @x - 0.5, @y - 0.5, @w, @h
     @update()
     
     if @bullet
@@ -46,7 +46,7 @@ class Player extends Entity
         console.log 'Math.abs(%s - %s) * 2 < %s + %s', obj.y, @y, obj.h, @h
         ctx = PT.activeEngine.ctx
         ctx.strokeStyle = "red"
-        ctx.strokeRect obj.x, obj.y, obj.w, obj.h
+        ctx.strokeRect obj.x - 0.5, obj.y - 0.5, obj.w, obj.h
 
   moveUp: ->
     @direction = 0

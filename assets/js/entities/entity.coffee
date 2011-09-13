@@ -12,6 +12,7 @@ class Entity
   update: (time) ->
     
   intersects: (e) ->
-    Math.abs(@x - e.x) * 2 < @w + e.w and Math.abs(@y - e.y) * 2 < @h + e.h
+    # TODO: OMFG
+    (Math.abs(@x - e.x)+4) * 2 < @w + e.w and (Math.abs(@y - e.y)+4) * 2 < @h + e.h
     
 window.Entity = Entity
