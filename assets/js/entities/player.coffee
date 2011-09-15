@@ -1,6 +1,6 @@
 PT = @PT
 
-class Player extends Entity
+class Player extends PT.Entity
   constructor: (@x, @y) ->
     @type = 'player'
     @direction = 0 #0 - north 
@@ -11,8 +11,8 @@ class Player extends Entity
     @birth_x = @x
     @birth_y = @y
     @bullet = null
-    @speed = 3
-    PT.player1 = @
+    @speed = 3    
+    @collides = false
 
   draw: (ctx) ->
     ctx.save()
@@ -41,32 +41,43 @@ class Player extends Entity
       @bullet.fly()
   
   update: (time) ->
-    window.PT.map_objects.middle.forEach (obj) =>
-      if obj.intersects?(@) and not obj.health?
-        console.log 'Math.abs(%s - %s) * 2 < %s + %s', obj.y, @y, obj.h, @h
-        ctx = PT.activeEngine.ctx
-        ctx.strokeStyle = "red"
-        ctx.strokeRect obj.x - 0.5, obj.y - 0.5, obj.w, obj.h
+    @collides = false
+    offset_x = 0
+    offset_y = 0    
+    switch @direction
+      when 0 then offset_y = -@speed
+      when 90 then offset_x = @speed
+      when 180 then offset_y = @speed
+      when 270 then offset_x = -@speed
+    
+    PT.map_objects.middle.forEach (obj) =>    
+      if obj.intersects?(@, offset_x, offset_y) and not obj.health?
+        @collides = true
+        #ctx = PT.activeEngine.ctx
+        #ctx.strokeStyle = "red"
+        #ctx.strokeRect obj.x - 0.5, obj.y - 0.5, obj.w, obj.h
+
+    @bullet?.update time
 
   moveUp: ->
-    @direction = 0
-    @y -= @speed
+    @direction = 0    
+    @y -= @speed unless @collides
 
   moveDown: ->
     @direction = 180
-    @y += @speed
+    @y += @speed unless @collides
 
   moveLeft: ->
     @direction = 270
-    @x -= @speed    
+    @x -= @speed unless @collides
 
   moveRight: ->
     @direction = 90
-    @x += @speed
+    @x += @speed unless @collides
 
   die: ->
     #do animation    
-    #set lives -1
+    #set lives 1-
     if @lives > 1
       @x = @birth_x
       @y = @birth_y
@@ -85,6 +96,6 @@ class Player extends Entity
         when 180 then y_b += 16
         else x_b -= 16
 
-      @bullet = new Bullet @, x_b, y_b
+      @bullet = new PT.Bullet @, x_b, y_b
 
-window.Player = Player
+PT.Player = Player

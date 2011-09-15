@@ -1,5 +1,5 @@
-class Powerup extends Entity
+class Powerup extends PT.Entity
   constructor: (type) ->
     @type = type
 
-window.Powerup = Powerup
+PT.Powerup = Powerup

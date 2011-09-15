@@ -26,4 +26,4 @@ class Keyboard
     for binding in map
       @bindKey binding.key, binding.cb, binding.delay
       
-window.Keyboard = Keyboard
+PT.Keyboard = Keyboard

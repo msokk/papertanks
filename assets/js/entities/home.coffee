@@ -1,4 +1,4 @@
-class Home extends Entity
+class Home extends PT.Entity
   constructor: (@x, @y) ->
     @type = 'home'
     @w = 32
@@ -7,4 +7,4 @@ class Home extends Entity
   draw: (ctx, time) ->
     ctx.sprites.draw @type, @x, @y, @w, @h
     
-window.Home = Home
+PT.Home = Home

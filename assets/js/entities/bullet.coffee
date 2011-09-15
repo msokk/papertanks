@@ -1,4 +1,4 @@
-class Bullet extends Entity
+class Bullet extends PT.Entity
   constructor: (@player, @x, @y) ->
     @type = 'bullet'
     @direction = @player.direction
@@ -33,4 +33,4 @@ class Bullet extends Entity
     #destroy the bullet object
     @player.bullet = null
 
-window.Bullet = Bullet
+PT.Bullet = Bullet

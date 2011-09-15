@@ -1,6 +1,6 @@
-class Brick extends Entity
+class Brick extends PT.Entity
   constructor: (@type = 'brick1', @x, @y) ->
     @w = 8
     @h = 8
     
-window.Brick = Brick
+PT.Brick = Brick

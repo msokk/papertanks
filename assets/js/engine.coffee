@@ -1,5 +1,3 @@
-PT = @PT
-
 # {Game} Engine
 # @constructor
 class Engine
@@ -23,11 +21,10 @@ class Engine
       console.log 'x: %s y: %s', e.offsetX, e.offsetY
       
     @ctx = $canvas[0].getContext '2d'
-    @ctx.fillRect 0, 0, 52 * 8, 52 * 8
-    
-    @sprites = SpriteSheet.loadTankSheet @ctx
-    map = new Map
-    PT.map_objects = @map_objects = map.load Map.map_collision_test, @ctx
+    @ctx.fillRect 0, 0, 52 * 8, 52 * 8    
+    @sprites = PT.SpriteSheet.loadTankSheet @ctx
+    map = new PT.Map
+    PT.map_objects = @map_objects = map.load PT.Map.map_1, @ctx
     
     @start()
     
@@ -59,13 +56,16 @@ class Engine
 
   drawLoop: (time) ->
     @ctx.fillStyle = "black"
-    @ctx.fillRect 0, 0, 52*8, 52*8
+    @ctx.fillRect 0, 0, 52*8, 52*8    
     for el of @map_objects
       @map_objects[el].forEach (obj, pos) =>
         obj.draw @ctx
 
   updateLoop: (time) ->
-    PT.player1?.update(time)
-    PT.player1?.bullet?.update(time)
+    for el of @map_objects
+      @map_objects[el].forEach (obj, pos) =>
+        obj.update time
+    
+    
 
 PT.Engine = Engine

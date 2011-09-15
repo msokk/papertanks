@@ -28,4 +28,4 @@ class SpriteSheet
         ctx
     ctx.sprites = sprites  
 
-window.SpriteSheet = SpriteSheet
+PT.SpriteSheet = SpriteSheet

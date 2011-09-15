@@ -1,5 +1,3 @@
-PT = @PT
-
 class Entity 
   constructor: (@x = 0, @y = 0) ->
     @type = 'unknown'
@@ -10,9 +8,9 @@ class Entity
     ctx.sprites.draw @type, @x, @y, @w, @h
 
   update: (time) ->
+
+  intersects: (e, offset_x = 0, offset_y = 0) ->        
+    not (@x > (e.x + offset_x) + e.w || @x + @w < (e.x + offset_x) || @y > (e.y + offset_y) + e.h || @y + @h < (e.y + offset_y))
     
-  intersects: (e) ->
-    # TODO: OMFG
-    (Math.abs(@x - e.x)+4) * 2 < @w + e.w and (Math.abs(@y - e.y)+4) * 2 < @h + e.h
     
-window.Entity = Entity
+PT.Entity = Entity
